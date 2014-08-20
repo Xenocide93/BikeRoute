@@ -4,6 +4,7 @@
     <string name="app_name">BikeRoute</string>
     <string name="title_section1">profile</string>
     <string name="title_section2">events</string>
+    <string name="title_section3">map</string>
     <string name="action_settings">Settings</string>
 
 </resources>

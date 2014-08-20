@@ -81,7 +81,7 @@ public class EventsFragment extends Fragment{
 		EventCardHeader header = new EventCardHeader(getActivity(), "THIS MONTH");
 		card.addCardHeader(header);
 		
-		EventCardExpand expand = new EventCardExpand(getActivity(), getTestEventArrayList());
+		EventCardExpand expand = new EventCardExpand(getActivity(), thisMonth);
 		card.addCardExpand(expand);
 		
 		CardView cardView = (CardView) getActivity().findViewById(R.id.card_expand_this_month1);
@@ -102,7 +102,7 @@ public class EventsFragment extends Fragment{
 		EventCardHeader header = new EventCardHeader(getActivity(), "NEXT MONTH");
 		card.addCardHeader(header);
 		
-		EventCardExpand expand = new EventCardExpand(getActivity(), getTestEventArrayList());
+		EventCardExpand expand = new EventCardExpand(getActivity(), nextMonth);
 		card.addCardExpand(expand);
 		
 		CardView cardView = (CardView) getActivity().findViewById(R.id.card_expand_next_month);
@@ -120,7 +120,7 @@ public class EventsFragment extends Fragment{
 		EventCardHeader header = new EventCardHeader(getActivity(), "OVERALL");
 		card.addCardHeader(header);
 		
-		EventCardExpand expand = new EventCardExpand(getActivity(), getTestEventArrayList());
+		EventCardExpand expand = new EventCardExpand(getActivity(), overAll);
 		card.addCardExpand(expand);
 		
 		CardView cardView = (CardView) getActivity().findViewById(R.id.card_expand_overall);
