@@ -64,6 +64,7 @@ public class HistoryCardExpand extends CardExpand {
 					placeFrom = (TextView) v.findViewById(R.id.place_from);
 					placeTo = (TextView) v.findViewById(R.id.place_to);
 					time = (TextView) v.findViewById(R.id.time);
+					
 					day.setText(pack.getDate());
 		    		month.setText(pack.getMonth());
 		    		placeFrom.setText(pack.getStart_location());
