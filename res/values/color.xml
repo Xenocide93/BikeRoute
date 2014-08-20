@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="general_background_gray">#F2F2F2</color>
+    <color name="green_pressed">#02a5a0</color>
+    <color name="green_normal">#00c3c3</color>
+    <color name="gray_normal">#5b5b5b</color>
+    <color name="yellow_normal">#f89a1a</color>
+    <color name="purple_normal">#b26ce3</color>
+    <color name="purple_pressed">#915bbc</color>
+    <color name="orange_normal">#ea7a57</color>
+    <color name="orange_pressed">#cc6550</color>
+    
+    <color name="gray_text_subtitle">#969696</color>
+    <color name="gray_text_title">#5b5b5b</color>
+    
+</resources>

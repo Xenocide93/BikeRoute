@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <!-- Card visible layout -->
+
+    <LinearLayout
+        android:id="@+id/card_main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <it.gmariotti.cardslib.library.view.component.CardHeaderView
+            android:id="@+id/card_header_layout"
+            style="@style/card.header_outer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="42dp" />
+
+        <!-- Expand layout. You can customize this element with your CardExpand class -->
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/card_content_expand_layout"
+        style="@style/card.main_contentExpand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+
+</LinearLayout>

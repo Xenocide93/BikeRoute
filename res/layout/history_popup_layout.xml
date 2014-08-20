@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:weightSum="100" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:weightSum="100" >
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="20" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <com.outcube.bikeroute.utility.SquareView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/curve_background_green" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/text_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="-8dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center_horizontal|bottom"
+                    android:text="08"
+                    android:textColor="#ffffff"
+                    android:textSize="33sp" />
+
+                <TextView
+                    android:id="@+id/text_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|top"
+                    android:text="AUG"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="6dp" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_vertical"
+                android:text="FROM"
+                android:textColor="@color/gray_text_subtitle"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_vertical"
+                android:text="TO"
+                android:textColor="@color/gray_text_subtitle"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_vertical"
+                android:text="TIME"
+                android:textColor="@color/gray_text_subtitle"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="40"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/place_from"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Paragon"
+                android:textColor="@color/gray_text_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/place_to"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="The Mall Bangkapi"
+                android:textColor="@color/gray_text_title"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="00:45:30"
+                android:textColor="@color/gray_text_title"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="80" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="100" >
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="50"
+                android:background="@null"
+                android:src="@drawable/curve_background_purple_selector" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="100" >
+
+            <com.outcube.bikeroute.utility.AutoResizeTextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="60"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:text="NAVIGATE"
+                android:textColor="#ffffff"
+                android:textSize="100dp" 
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

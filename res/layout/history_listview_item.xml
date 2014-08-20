@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@drawable/curve_background_white"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:weightSum="100" >
+	
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="20" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <com.outcube.bikeroute.utility.SquareView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/curve_background_green" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/text_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_horizontal|bottom"
+                android:text="08"
+                android:textColor="#ffffff"
+                android:textSize="33sp"
+                android:layout_marginBottom="-8dp" />
+
+            <TextView
+                android:id="@+id/text_month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|top"
+                android:text="AUG"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="15"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="6dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_vertical"
+            android:text="FROM"
+            android:textColor="@color/gray_text_subtitle"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_vertical"
+            android:text="TO"
+            android:textColor="@color/gray_text_subtitle"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_vertical"
+            android:text="TIME"
+            android:textColor="@color/gray_text_subtitle"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="40"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/place_from"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Paragon"
+            android:textColor="@color/gray_text_title"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/place_to"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="The Mall Bangkapi"
+            android:textColor="@color/gray_text_title"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="00:45:30"
+            android:textColor="@color/gray_text_title"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="0.2dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="17dp"
+        android:background="@color/gray_text_subtitle"
+        android:paddingTop="17dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="25"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="DISTANCE"
+            android:textColor="@color/gray_text_subtitle"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="32"
+                android:textColor="@color/gray_text_title"
+                android:textSize="33sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/distance"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5dp"
+                android:layout_toRightOf="@id/distance"
+                android:text="km"
+                android:textColor="@color/gray_text_title"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

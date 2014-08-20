@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/general_background_gray" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <it.gmariotti.cardslib.library.view.CardView
+            android:id="@+id/card_expand_this_month1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            card:card_layout_resourceID="@layout/event_card_layout" />
+
+        <it.gmariotti.cardslib.library.view.CardView
+            android:id="@+id/card_expand_next_month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            card:card_layout_resourceID="@layout/event_card_layout" />
+
+        <it.gmariotti.cardslib.library.view.CardView
+            android:id="@+id/card_expand_overall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            card:card_layout_resourceID="@layout/event_card_layout" />
+    </LinearLayout>
+</ScrollView>
