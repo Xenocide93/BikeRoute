@@ -3,19 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="100" >
+    android:weightSum="1" >
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="70" />
+        android:layout_weight="0.7" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="30"
+        android:layout_weight="0.3"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -30,39 +30,44 @@
             android:paddingRight="5dp"
             android:paddingTop="10dp" >
 
-            <ImageButton
+            <ImageButton 
                 android:id="@+id/rate3"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/curve_background_green_selector" />
-            <ImageButton
+                android:layout_height="match_parent"
+                android:src="@drawable/curve_background_green_selector"
+                android:background="@null"/>
+            <ImageButton 
                 android:id="@+id/rate2"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/curve_background_green_selector" />
-            <ImageButton
+                android:layout_height="match_parent"
+                android:src="@drawable/curve_background_orange_lite_selector"
+                android:background="@null"/>
+            <ImageButton 
                 android:id="@+id/rate1"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/curve_background_green_selector" />
-            <ImageButton
+                android:layout_height="match_parent"
+                android:src="@drawable/curve_background_red_selector"
+                android:background="@null"/>
+            <ImageButton 
                 android:id="@+id/rate0"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/curve_background_green_selector" />
-
+                android:layout_height="match_parent"
+                android:src="@drawable/curve_background_gray_selector"
+                android:background="@null"/>
+            
+            
         </LinearLayout>
 
         <SeekBar
