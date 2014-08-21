@@ -40,16 +40,20 @@ public class MapActivity extends Activity{
 			public void onClick(View v) {
 				switch (v.getId()) {
 				case R.id.rate3:
-					
+					Toast.makeText(getApplicationContext(), "Rate: 3", Toast.LENGTH_SHORT).show();
+
 					break;
 				case R.id.rate2:
-					
+					Toast.makeText(getApplicationContext(), "Rate: 2", Toast.LENGTH_SHORT).show();
+
 					break;
 				case R.id.rate1:
-					
+					Toast.makeText(getApplicationContext(), "Rate: 1", Toast.LENGTH_SHORT).show();
+
 					break;
 				case R.id.rate0:
-					
+					Toast.makeText(getApplicationContext(), "Rate: reset", Toast.LENGTH_SHORT).show();
+
 					break;
 				default:
 					break;
@@ -57,15 +61,22 @@ public class MapActivity extends Activity{
 			}
 		};
 
+		rate3Btn.setOnClickListener(L);
+		rate2Btn.setOnClickListener(L);
+		rate1Btn.setOnClickListener(L);
+		rateResetBtn.setOnClickListener(L);
+
 		seekbar.setMax(100);
 		seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {}
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				Toast.makeText(getApplicationContext(), "Progress: "+seekBar.getProgress(), Toast.LENGTH_SHORT).show();
+			}
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {}
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
-
+				//TODO Set color to the polyline in real time
 			}
 		});
 
@@ -73,6 +84,7 @@ public class MapActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				int searchId = Integer.parseInt(idEditText.getText().toString());
+				Toast.makeText(getApplicationContext(), "Search ID: "+searchId, Toast.LENGTH_SHORT).show();
 
 			}
 		});
@@ -89,23 +101,10 @@ public class MapActivity extends Activity{
 	private void initilizeMap() {
 		if (googleMap == null) {
 			googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-
-			// check if map is created successfully or not
 			if (googleMap == null) {
-				Toast.makeText(getApplicationContext(),"Sorry! unable to create maps", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Sorry! unable to create maps", Toast.LENGTH_SHORT).show();
 			}
 		}
-
-		// latitude and longitude
-		double latitude = 13.788293;
-		double longitude = 100.653023;
-
-		// create marker
-		MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Hello Maps ");
-
-		// adding marker
-		googleMap.addMarker(marker);
-
 	}
 
 	private void findAllById(){
