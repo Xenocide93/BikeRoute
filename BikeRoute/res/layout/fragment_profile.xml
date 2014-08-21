@@ -89,8 +89,8 @@
                         android:src="@drawable/profile_location" />
 
                     <com.outcube.bikeroute.utility.AutoResizeTextView
-                        android:layout_width="0dp"
                         android:id="@+id/address"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="15"
                         android:fontFamily="sans-serif-thin"
@@ -140,32 +140,60 @@
         </RadioGroup>
 
         <LinearLayout
+            android:id="@+id/history_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:visibility="visible" 
+            android:alpha="1.0">
 
             <it.gmariotti.cardslib.library.view.CardView
                 android:id="@+id/card_expand_today"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                card:card_layout_resourceID="@layout/history_card_layout" />
+                card:card_layout_resourceID="@layout/expand_outside_card_layout" />
 
             <it.gmariotti.cardslib.library.view.CardView
                 android:id="@+id/card_expand_weekly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                card:card_layout_resourceID="@layout/history_card_layout" />
+                card:card_layout_resourceID="@layout/expand_outside_card_layout" />
 
             <it.gmariotti.cardslib.library.view.CardView
                 android:id="@+id/card_expand_monthly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                card:card_layout_resourceID="@layout/history_card_layout" />
+                card:card_layout_resourceID="@layout/expand_outside_card_layout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/stat_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:visibility="gone" 
+            android:alpha="0.0">
+
+            <it.gmariotti.cardslib.library.view.CardView
+                android:id="@+id/stat_card_expand_today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card:card_layout_resourceID="@layout/expand_outside_card_layout" />
+
+            <it.gmariotti.cardslib.library.view.CardView
+                android:id="@+id/stat_card_expand_weekly" 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                card:card_layout_resourceID="@layout/expand_outside_card_layout" />
         </LinearLayout>
     </LinearLayout>
 

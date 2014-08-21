@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -43,6 +44,8 @@ public class EventCardExpand extends CardExpand {
     	LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     	for (int i = 0; i < events.size(); i++) {
     		Events pack = events.get(i);
+    		//TODO add 1 boolean to object Events
+    		final boolean isJoin = true; 
     		View row = inflater.inflate(R.layout.event_listview_item, linearLayoutListView, false);
     		findAllById(row);
     		if(pack.getDate() < 10) day.setText("0"+pack.getDate());
@@ -51,7 +54,31 @@ public class EventCardExpand extends CardExpand {
     		name.setText(pack.getName());
     		place.setText(pack.getLocation());
     		time.setText(pack.getTime());
-    		joinBtnText.setText("JOIN");
+    		
+    		if(isJoin){
+    			joinBtnText.setText("CANCEL");
+    			joinBtn.setBackgroundResource(R.drawable.curve_background_orange_selector);
+    		} else {
+    			joinBtnText.setText("JOIN");
+    			joinBtn.setBackgroundResource(R.drawable.curve_background_purple_selector);
+    		}
+    		
+    		joinBtn.setOnClickListener(new OnClickListener() {
+				@SuppressWarnings("unused")
+				@Override
+				public void onClick(View v) {
+					if(true){ //TODO change pack to final and call getIsJoin from pack
+						//isJoin = false;
+						joinBtnText.setText("JOIN");
+		    			joinBtn.setBackgroundResource(R.drawable.curve_background_purple_selector);
+					} else {
+						//isJoin = true;
+						joinBtnText.setText("CANCEL");
+		    			joinBtn.setBackgroundResource(R.drawable.curve_background_orange_selector);
+					}
+				}
+			});
+    		
     		linearLayoutListView.addView(row);
 		}
     	

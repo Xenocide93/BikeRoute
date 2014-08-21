@@ -43,7 +43,6 @@ public class HistoryCardExpand extends CardExpand {
 	public void setupInnerViewElements(ViewGroup parent, View view) {
 		parent.setBackgroundColor(Color.TRANSPARENT);
 
-		ListView listView = (ListView) view.findViewById(R.id.listview);
 		LinearLayout linearLayoutListView = (LinearLayout) view.findViewById(R.id.linear_layout_listview_replacement);
 
 		//    	HistoryAdapter adapter = new HistoryAdapter(mContext, R.layout.history_listview_item, histories);
