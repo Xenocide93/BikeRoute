@@ -7,6 +7,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.outcube.bikeroute.R;
+import com.outcube.bikeroute.utility.BlurBackgroundDialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -65,7 +66,7 @@ public class HistoryCardExpand extends CardExpand {
 			row.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Dialog dialog = new Dialog(mContext, android.R.style.Theme_Translucent_NoTitleBar);
+					BlurBackgroundDialog dialog = new BlurBackgroundDialog(mContext);
 					dialog.setContentView(R.layout.history_popup_layout);
 					dialog.setCanceledOnTouchOutside(true);
 					dialog.setCancelable(true);
@@ -93,7 +94,8 @@ public class HistoryCardExpand extends CardExpand {
 					});
 					
 					GoogleMap googleMap = ((MapFragment) ((Activity)HistoryCardExpand.this.getContext()).getFragmentManager().findFragmentById(R.id.map)).getMap();
-
+					
+					dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 					dialog.show();
 				}
 			});

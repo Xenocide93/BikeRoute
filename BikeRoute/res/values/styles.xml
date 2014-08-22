@@ -1,5 +1,39 @@
-<resources>
-
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+	<style name="FadeDialogAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+    
+    <style name="DateNum">
+        <item name="fontName">bebas.ttf</item>
+    </style>
+    <style name="title">
+        <item name="fontName">ThaiSansNeue-Black.ttf</item>
+        <item name="android:textColor">#5b5b5b</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="subTitle">
+        <item name="fontName">ThaiSansNeue-Light.ttf</item>
+        <item name="android:textColor">#969696</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="button">
+        <item name="fontName">bebas.ttf</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="distanceHistory">
+        <item name="fontName">bebas.ttf</item>
+        <item name="android:textColor">#5d5d5d</item>
+        <item name="android:textSize">33sp</item>
+    </style>
+    <style name="statNum">
+        <item name="fontName">bebas.ttf</item>
+        <item name="android:textColor">#00c4c4</item>
+        <item name="android:textSize">43sp</item>
+    </style>
+    
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -11,7 +45,11 @@
             backward-compatibility can go here.
         -->
     </style>
-
+	<style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/bubble_in</item>
+        <item name="android:windowExitAnimation">@anim/bubble_out</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->

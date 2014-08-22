@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:font="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -37,16 +38,16 @@
                 android:gravity="center"
                 android:orientation="vertical" >
 
-                <TextView
+                <com.outcube.bikeroute.utility.CustomFontTextView
                     android:id="@+id/text_day"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-8dp"
-                    android:fontFamily="sans-serif-condensed"
+                    android:layout_marginBottom="-7dp"
                     android:gravity="center_horizontal|bottom"
                     android:text="08"
                     android:textColor="#ffffff"
-                    android:textSize="33sp" />
+                    android:textSize="33sp"
+                    font:fontName="bebas.ttf" />
 
                 <TextView
                     android:id="@+id/text_month"
@@ -145,46 +146,60 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:tag="map"
-        android:layout_weight="80" />
+        android:layout_weight="80"
+        android:tag="map" />
 
-    <FrameLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="45dp" >
+        android:layout_height="0dp"
+        android:layout_weight="3" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="100" >
+
+        <FrameLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="100" >
+            android:layout_weight="50" >
 
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="50"
-                android:background="@null"
-                android:src="@drawable/curve_background_purple_selector" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:weightSum="100" >
-
-            <com.outcube.bikeroute.utility.AutoResizeTextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="60"
-                android:fontFamily="sans-serif-condensed"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="NAVIGATE"
-                android:textColor="#ffffff"
-                android:textSize="100dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </FrameLayout>
+                android:orientation="vertical" >
+
+                <ImageButton
+                    android:id="@+id/join_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/curve_background_purple_selector" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <com.outcube.bikeroute.utility.CustomFontTextView
+                    android:id="@+id/join_btn_text"
+                    style="@style/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|bottom"
+                    android:text="NAVIGATE" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3" />
 
 </LinearLayout>

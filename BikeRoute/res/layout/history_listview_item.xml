@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:padding="10dp"
     android:weightSum="100" >
-	
+
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -30,16 +30,16 @@
             android:gravity="center"
             android:orientation="vertical" >
 
-            <TextView
+            <com.outcube.bikeroute.utility.CustomFontTextView
                 android:id="@+id/text_day"
+                style="@style/DateNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
+                android:layout_marginBottom="-7dp"
                 android:gravity="center_horizontal|bottom"
                 android:text="08"
                 android:textColor="#ffffff"
-                android:textSize="33sp"
-                android:layout_marginBottom="-8dp" />
+                android:textSize="33sp" />
 
             <TextView
                 android:id="@+id/text_month"
@@ -162,14 +162,13 @@
             android:layout_weight="3"
             android:gravity="center" >
 
-            <TextView
+            <com.outcube.bikeroute.utility.CustomFontTextView
+                style="@style/distanceHistory"
                 android:id="@+id/distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="32"
-                android:textColor="@color/gray_text_title"
-                android:textSize="33sp" />
+                android:text="32" />
 
             <TextView
                 android:layout_width="wrap_content"

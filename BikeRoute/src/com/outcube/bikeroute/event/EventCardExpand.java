@@ -3,8 +3,10 @@ package com.outcube.bikeroute.event;
 import java.util.ArrayList;
 
 import com.outcube.bikeroute.R;
+import com.outcube.bikeroute.utility.BlurBackgroundDialog;
 import com.outcube.bikeroute.utility.SquareImageButton;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -52,7 +54,6 @@ public class EventCardExpand extends CardExpand {
     		place.setText(pack.getLocation());
     		time.setText(pack.getTime());
     		
-    		
     		if(pack.isJoin()){
     			joinBtnText.setText("CANCEL");
     			joinBtn.setBackgroundResource(R.drawable.curve_background_orange_selector);
@@ -62,7 +63,6 @@ public class EventCardExpand extends CardExpand {
     		}
     		
     		joinBtn.setOnClickListener(new OnClickListener() {
-				@SuppressWarnings("unused")
 				@Override
 				public void onClick(View v) {
 					if(pack.isJoin()){
@@ -74,6 +74,22 @@ public class EventCardExpand extends CardExpand {
 						joinBtnText.setText("CANCEL");
 		    			joinBtn.setBackgroundResource(R.drawable.curve_background_orange_selector);
 					}
+				}
+			});
+    		
+    		row.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					BlurBackgroundDialog dialog = new BlurBackgroundDialog(mContext);
+					dialog.setContentView(R.layout.event_popup);
+					dialog.setCanceledOnTouchOutside(true);
+					dialog.setCancelable(true);
+					
+					
+					
+					dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+					dialog.show();
 				}
 			});
     		

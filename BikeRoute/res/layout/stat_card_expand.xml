@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="300dp"
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:layout_marginTop="5dp"
+    android:gravity="center"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -34,17 +35,14 @@
                     android:text="DISTANCE"
                     android:textSize="17sp" />
 
-                <TextView
+                <com.outcube.bikeroute.utility.CustomFontTextView
+                    style="@style/statNum"
                     android:id="@+id/distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-10dp"
-                    android:layout_marginTop="-5dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="12.0"
-                    android:textColor="@color/green_normal"
-                    android:textSize="60sp"
-                    android:textStyle="bold" />
+                    android:layout_marginBottom="-3dp"
+                    android:layout_marginTop="-1dp"
+                    android:text="12.0" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -76,17 +74,14 @@
                     android:text="CALORIE BURN"
                     android:textSize="17sp" />
 
-                <TextView
+                <com.outcube.bikeroute.utility.CustomFontTextView
+                    style="@style/statNum"
                     android:id="@+id/calorie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-6dp"
+                    android:layout_marginBottom="-3dp"
                     android:layout_marginTop="-1dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="1250"
-                    android:textColor="@color/green_normal"
-                    android:textSize="52sp"
-                    android:textStyle="bold" />
+                    android:text="1250"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -124,17 +119,14 @@
                     android:text="SPEED AVG"
                     android:textSize="17sp" />
 
-                <TextView
+               <com.outcube.bikeroute.utility.CustomFontTextView
+                    style="@style/statNum"
                     android:id="@+id/speed_avg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-15dp"
-                    android:layout_marginTop="-10dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="3.5"
-                    android:textColor="@color/green_normal"
-                    android:textSize="70sp"
-                    android:textStyle="bold" />
+                    android:layout_marginBottom="-3dp"
+                    android:layout_marginTop="-1dp"
+                    android:text="3.5"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -166,17 +158,14 @@
                     android:text="SPEED MAX"
                     android:textSize="17sp" />
 
-                <TextView
+                <com.outcube.bikeroute.utility.CustomFontTextView
+                    style="@style/statNum"
                     android:id="@+id/speed_max"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-15dp"
-                    android:layout_marginTop="-10dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="3.5"
-                    android:textColor="@color/green_normal"
-                    android:textSize="70sp"
-                    android:textStyle="bold" />
+                    android:layout_marginBottom="-3dp"
+                    android:layout_marginTop="-1dp"
+                    android:text="3.5"/>
 
                 <TextView
                     android:layout_width="wrap_content"
