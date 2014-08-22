@@ -1,6 +1,11 @@
 package com.outcube.bikeroute.database;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -52,5 +57,62 @@ public class DatabaseProfile extends SQLiteOpenHelper{
     }
     
 
+    /**
+     * All CRUD(Create, Read, Update, Delete) Operations
+     */
+ 
+    // Adding new journey
+    public void addProfile(ProfileForDB profile) {
+        SQLiteDatabase db = this.getWritableDatabase();
+ 
+        ContentValues values = new ContentValues();
+        values.put(KEY_CALORIES, profile.getJour_cal());
+        values.put(KEY_DISTANCE, profile.getJour_dist());
+        values.put(KEY_ENDPOINT, profile.getJour_endpoint());
+        values.put(KEY_MAXSPEED, profile.getJour_maxspeed());
+        values.put(KEY_STARTPOINT, profile.getJour_startpoint());
+        values.put(KEY_STARTTIME, profile.getJour_startdatetime());
+        values.put(KEY_STOPTIME, profile.getJour_stopdatetime());
+ 
+        // Inserting Row
+        db.insert(TABLE_PROFILE, null, values);
+        db.close(); // Closing database connection
+    }
+     
+    // Getting All journeys
+    public List<ProfileForDB> getAllProfiles() {
+        List<ProfileForDB> profileList = new ArrayList<ProfileForDB>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_PROFILE;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+            	ProfileForDB profile = new ProfileForDB(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)), 
+            			Integer.parseInt(cursor.getString(2)),cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+                profileList.add(profile);
+            } while (cursor.moveToNext());
+        }
+        return profileList;
+    }
+ 
+    public void deleteAll() {
+    	SQLiteDatabase db = this.getWritableDatabase();
+    	db.delete(TABLE_PROFILE, null, null);
+    	db.close();
+    }
+ 
+ 
+    // Getting event Count
+    public int getEventCount() {
+        String historyQuery = "SELECT  * FROM " + TABLE_PROFILE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(historyQuery, null);
+        cursor.close();
+        // return count
+        return cursor.getCount();
+    }
+	
 	
 }

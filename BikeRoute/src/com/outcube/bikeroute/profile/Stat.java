@@ -1,16 +1,26 @@
-package com.outcube.bikeroute.database;
+package com.outcube.bikeroute.profile;
 
 public class Stat {
 	private float distance;
 	private float calorieBurn;
 	private float speedAvg;
 	private float speedMax;
+	private String totalTime;
 	
-	public Stat(float dis, float cal, float avg, float max) {
+	public Stat(float dis, float cal, float avg, float max, String totalTime) {
 		distance = dis;
 		calorieBurn = cal;
 		speedAvg = avg;
 		speedMax = max;
+		this.totalTime = totalTime;
+	}
+	
+	public String getTotalTime() {
+		return totalTime;
+	}
+
+	public void setTotalTime(String totalTime) {
+		this.totalTime = totalTime;
 	}
 
 	public float getDistance() {

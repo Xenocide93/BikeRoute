@@ -11,6 +11,10 @@ public class ProfileForDB {
 	private String jour_endpoint;
 
 	
+	public ProfileForDB() {
+		
+	}
+	
 	public ProfileForDB(int jour_dist,int jour_maxspeed,int jour_cal,String jour_startdatetime,
 			String jour_stopdatetime,String jour_startpoint,String jour_endpoint) {
 		this.jour_dist = jour_dist;

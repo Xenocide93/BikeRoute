@@ -20,11 +20,11 @@ import com.google.gson.GsonBuilder;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.outcube.bikeroute.database.Events;
 import com.outcube.bikeroute.database.EventsForDB;
 import com.outcube.bikeroute.event.EventCard;
 import com.outcube.bikeroute.event.EventCardExpand;
 import com.outcube.bikeroute.event.EventCardHeader;
+import com.outcube.bikeroute.event.Events;
 
 import android.app.Fragment;
 import android.graphics.Bitmap;
@@ -45,6 +45,10 @@ public class EventsFragment extends Fragment{
 	private ArrayList<EventsForDB> thisMonthEvents;
 	private ArrayList<EventsForDB> nextMonthEvents;
 	private ArrayList<EventsForDB> overAllEvents;
+	private int totalEvents;
+	private int countEvents;
+	private boolean syncDone;
+	
 	
 	
 	// TODO: กด join, cancel event ต่างๆ ได้ ส่ง user_id, event_id ไป table eventjoined
@@ -55,12 +59,9 @@ public class EventsFragment extends Fragment{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		new AsyncCallerEventsFeed().execute();
-		thisMonthEvents = new ArrayList<EventsForDB>();
-		nextMonthEvents = new ArrayList<EventsForDB>();
-		overAllEvents = new ArrayList<EventsForDB>();
-		thisMonth = new ArrayList<Events>();
-		nextMonth = new ArrayList<Events>();
-		overAll = new ArrayList<Events>();
+		totalEvents = 0;
+		countEvents = 0;
+		syncDone = false;
 		initializeEventsArrayList();
 		
 	}
@@ -130,15 +131,57 @@ public class EventsFragment extends Fragment{
 		cardView.setCard(card);
 	}
 	
-	private ArrayList<Events> getTestEventArrayList(){
-		ArrayList<Events> array = new ArrayList<Events>();
-		array.add(new Events(1, 12, "JAN", "event_name_1", "location_name_1", "07.30-11.00", "none", null, null));
-		array.add(new Events(2, 21, "DEC", "event_name_2", "location_name_2", "08.30-12.00", "none", null, null));
-		array.add(new Events(3, 30, "JUN", "event_name_3", "location_name_3", "09.30-13.00", "none", null, null));
-		return array;
+	
+	private void refreshFragment() {
+		CardView cardView = (CardView) getActivity().findViewById(R.id.card_expand_this_month1);
+		CardView cardView2 = (CardView) getActivity().findViewById(R.id.card_expand_next_month);
+		CardView cardView3 = (CardView) getActivity().findViewById(R.id.card_expand_overall);
+		
+		EventCard card = new EventCard(this.getActivity(), R.layout.event_card_layout);
+		card.setBackgroundResourceId(R.drawable.curve_background_gray);
+		card.setShadow(false);
+		EventCardHeader header = new EventCardHeader(getActivity(), "THIS MONTH");
+		card.addCardHeader(header);
+		EventCardExpand expand = new EventCardExpand(getActivity(), thisMonth);
+		card.addCardExpand(expand);
+		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(cardView);
+		card.setViewToClickToExpand(viewToClickToExpand);
+		card.setExpanded(true);
+		cardView.replaceCard(card);
+		header.arrow.setRotation(270f);
+		
+		EventCard card2 = new EventCard(this.getActivity(), R.layout.event_card_layout);
+		card2.setBackgroundResourceId(R.drawable.curve_background_gray);
+		card2.setShadow(false);
+		EventCardHeader header2 = new EventCardHeader(getActivity(), "NEXT MONTH");
+		card2.addCardHeader(header2);
+		EventCardExpand expand2 = new EventCardExpand(getActivity(), nextMonth);
+		card2.addCardExpand(expand2);
+		ViewToClickToExpand viewToClickToExpand2 = ViewToClickToExpand.builder().highlightView(false).setupView(cardView2);
+		card2.setViewToClickToExpand(viewToClickToExpand2);
+		cardView2.replaceCard(card2);
+		
+		EventCard card3 = new EventCard(this.getActivity(), R.layout.event_card_layout);
+		card3.setBackgroundResourceId(R.drawable.curve_background_gray);
+		card3.setShadow(false);
+		EventCardHeader header3 = new EventCardHeader(getActivity(), "OVERALL");
+		card3.addCardHeader(header3);
+		EventCardExpand expand3 = new EventCardExpand(getActivity(), overAll);
+		card3.addCardExpand(expand3);
+		ViewToClickToExpand viewToClickToExpand3 = ViewToClickToExpand.builder().highlightView(false).setupView(cardView3);
+		card3.setViewToClickToExpand(viewToClickToExpand3);
+		cardView3.replaceCard(card3);
 	}
 	
+	
 	private void initializeEventsArrayList() {
+		Log.i("Mint", "initializeEventsArrayList");
+		thisMonthEvents = new ArrayList<EventsForDB>();
+		nextMonthEvents = new ArrayList<EventsForDB>();
+		overAllEvents = new ArrayList<EventsForDB>();
+		thisMonth = new ArrayList<Events>();
+		nextMonth = new ArrayList<Events>();
+		overAll = new ArrayList<Events>();
 		List<EventsForDB> events = MainActivity.databaseEvents.getAllEvents();
 		for (int i = 0; i < events.size(); i++) {
 			overAllEvents.add(events.get(i));
@@ -166,7 +209,7 @@ public class EventsFragment extends Fragment{
 			event.setLocation(temp.getEvent_location());
 			event.setName(temp.getEvent_name());
 			event.setTime(startDateTime[1] + "-" + endDateTime[1]);
-			event.setPhoto(decodeByteArray(temp.getEvent_photo()));
+			if (temp.getEvent_photo() != null) event.setPhoto(decodeByteArray(temp.getEvent_photo()));
 			event.setEventDate(startDateTime[0] + " to " + endDateTime[0]);
 			event.setEvent_id(temp.getId());
 			thisMonth.add(event);
@@ -185,7 +228,7 @@ public class EventsFragment extends Fragment{
 			event.setLocation(temp.getEvent_location());
 			event.setName(temp.getEvent_name());
 			event.setTime(startDateTime[1] + "-" + endDateTime[1]);
-			event.setPhoto(decodeByteArray(temp.getEvent_photo()));
+			if (temp.getEvent_photo() != null) event.setPhoto(decodeByteArray(temp.getEvent_photo()));
 			event.setEventDate(startDateTime[0] + " to " + endDateTime[0]);
 			event.setEvent_id(temp.getId());
 			nextMonth.add(event);
@@ -204,10 +247,13 @@ public class EventsFragment extends Fragment{
 			event.setLocation(temp.getEvent_location());
 			event.setName(temp.getEvent_name());
 			event.setTime(startDateTime[1] + "-" + endDateTime[1]);
-			event.setPhoto(decodeByteArray(temp.getEvent_photo()));
+			if (temp.getEvent_photo() != null) event.setPhoto(decodeByteArray(temp.getEvent_photo()));
 			event.setEventDate(startDateTime[0] + " to " + endDateTime[0]);
 			event.setEvent_id(temp.getId());
 			overAll.add(event);
+		}
+		if (syncDone) {
+			refreshFragment();
 		}
 	}
 	
@@ -256,6 +302,9 @@ public class EventsFragment extends Fragment{
 	                    event.setEvent_enddate(tempDay);
 	                    event.setEvent_startdate(obj.get("event_startdate").toString());
 	                    event.setEvent_location(obj.get("event_location").toString());
+	                    MainActivity.databaseEvents.addEvent(event);
+	                    totalEvents++;
+	                    Log.i("Mint", "add event to sqlite successfully");
 	                    new DownloadImageTask().execute(obj.get("event_photo").toString(),event);
                     }
                 }
@@ -324,8 +373,9 @@ public class EventsFragment extends Fragment{
 	            mIcon11.compress(Bitmap.CompressFormat.PNG, 100, out);
 	            byte[] buffer = out.toByteArray();
 	            event.setEvent_photo(buffer);
-	            MainActivity.databaseEvents.addEvent(event);
-	            Log.i("Mint", "add event to sqlite successfully");
+	            MainActivity.databaseEvents.updateEvent(event);
+	            countEvents++;
+	            Log.i("Mint", "update event to sqlite successfully");
 	        } catch (Exception e) {
 	            Log.e("Error", e.getMessage());
 	            e.printStackTrace();
@@ -335,6 +385,10 @@ public class EventsFragment extends Fragment{
 
 	    protected void onPostExecute(Void result) {
 	    	super.onPostExecute(result);
+	    	if (totalEvents == countEvents) {
+	    		syncDone = true;
+	    		initializeEventsArrayList();
+	    	}
 	    }
 	}
 

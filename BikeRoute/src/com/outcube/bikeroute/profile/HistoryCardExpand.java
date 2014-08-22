@@ -1,5 +1,7 @@
 package com.outcube.bikeroute.profile;
 
+import java.util.ArrayList;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -24,12 +26,12 @@ import android.widget.Toast;
 import it.gmariotti.cardslib.library.internal.CardExpand;
 
 public class HistoryCardExpand extends CardExpand {
-	private History[] histories;
+	private ArrayList<History> histories;
 	private TextView day, month, placeFrom, placeTo, time, distance;
 
 	private static MapFragment map;
 
-	public HistoryCardExpand(Context context, History[] histories) {
+	public HistoryCardExpand(Context context, ArrayList<History> histories) {
 		super(context,R.layout.history_expand);
 		this.histories = histories;
 	}
@@ -49,11 +51,11 @@ public class HistoryCardExpand extends CardExpand {
 		//    	listView.setAdapter(adapter);
 
 		LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		for (int i = 0; i < histories.length; i++) {
-			final History pack = histories[i];
+		for (int i = 0; i < histories.size(); i++) {
+			final History pack = histories.get(i);
 			View row = inflater.inflate(R.layout.history_listview_item, linearLayoutListView, false);
 			findAllById(row);
-			day.setText(pack.getDate());
+			day.setText(pack.getDate()+"");
 			month.setText(pack.getMonth());
 			placeFrom.setText(pack.getStart_location());
 			placeTo.setText(pack.getFinal_location());
@@ -75,7 +77,7 @@ public class HistoryCardExpand extends CardExpand {
 					placeTo = (TextView) dialog.findViewById(R.id.place_to);
 					time = (TextView) dialog.findViewById(R.id.time);
 
-					day.setText(pack.getDate());
+					day.setText(pack.getDate()+"");
 					month.setText(pack.getMonth());
 					placeFrom.setText(pack.getStart_location());
 					placeTo.setText(pack.getFinal_location());

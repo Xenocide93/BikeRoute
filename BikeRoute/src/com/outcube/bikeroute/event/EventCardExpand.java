@@ -3,7 +3,6 @@ package com.outcube.bikeroute.event;
 import java.util.ArrayList;
 
 import com.outcube.bikeroute.R;
-import com.outcube.bikeroute.database.Events;
 import com.outcube.bikeroute.utility.SquareImageButton;
 
 import android.content.Context;
@@ -29,7 +28,6 @@ public class EventCardExpand extends CardExpand {
 	
 	public EventCardExpand(Context context, int innerLayout) {
 		super(context,R.layout.event_expand);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -43,9 +41,8 @@ public class EventCardExpand extends CardExpand {
     	
     	LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     	for (int i = 0; i < events.size(); i++) {
-    		Events pack = events.get(i);
-    		//TODO add 1 boolean to object Events
-    		final boolean isJoin = true; 
+    		final Events pack = events.get(i);
+    		
     		View row = inflater.inflate(R.layout.event_listview_item, linearLayoutListView, false);
     		findAllById(row);
     		if(pack.getDate() < 10) day.setText("0"+pack.getDate());
@@ -55,7 +52,8 @@ public class EventCardExpand extends CardExpand {
     		place.setText(pack.getLocation());
     		time.setText(pack.getTime());
     		
-    		if(isJoin){
+    		
+    		if(pack.isJoin()){
     			joinBtnText.setText("CANCEL");
     			joinBtn.setBackgroundResource(R.drawable.curve_background_orange_selector);
     		} else {
@@ -67,12 +65,12 @@ public class EventCardExpand extends CardExpand {
 				@SuppressWarnings("unused")
 				@Override
 				public void onClick(View v) {
-					if(true){ //TODO change pack to final and call getIsJoin from pack
-						//isJoin = false;
+					if(pack.isJoin()){
+						pack.setJoin(false);
 						joinBtnText.setText("JOIN");
 		    			joinBtn.setBackgroundResource(R.drawable.curve_background_purple_selector);
 					} else {
-						//isJoin = true;
+						pack.setJoin(true);
 						joinBtnText.setText("CANCEL");
 		    			joinBtn.setBackgroundResource(R.drawable.curve_background_orange_selector);
 					}

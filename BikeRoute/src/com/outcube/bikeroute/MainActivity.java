@@ -2,10 +2,12 @@ package com.outcube.bikeroute;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import com.outcube.bikeroute.database.DatabaseEvents;
+import com.outcube.bikeroute.database.DatabaseProfile;
 
 
 import android.app.Activity;
@@ -31,9 +33,14 @@ import android.widget.TextView;
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 	
 	public static DatabaseEvents databaseEvents;
+	public static DatabaseProfile databaseProfile;
 	public static int nowTimeYear;
 	public static int nowTimeMonth;
 	public static int nowTimeDay;
+	
+	public static int user_id = 1;
+	//dayOfWeek == 1 means Sunday .... 7 means Saturday
+	public static int dayOfWeek;
 	
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -72,6 +79,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		databaseEvents = new DatabaseEvents(this);
+		databaseProfile = new DatabaseProfile(this);
 		Calendar cal = Calendar.getInstance(TimeZone.getDefault());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
 	    String nowTime = ""+sdf.format(cal.getTime());
@@ -79,6 +87,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	    nowTimeYear = Integer.parseInt(temp[0]);
 	    nowTimeMonth = Integer.parseInt(temp[1]);
 	    nowTimeDay = Integer.parseInt(temp[2]);
+	    
+	    Date date = new Date();
+		Calendar cal2 = Calendar.getInstance();
+		cal.setTime(date);
+		dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+		
+		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

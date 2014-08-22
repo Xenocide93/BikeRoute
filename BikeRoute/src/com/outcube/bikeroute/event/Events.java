@@ -1,4 +1,4 @@
-package com.outcube.bikeroute.database;
+package com.outcube.bikeroute.event;
 
 import android.graphics.Bitmap;
 
@@ -13,8 +13,10 @@ public class Events {
 	private String description;
 	private Bitmap photo;
 	private String eventDate;
+	private boolean isJoin;
 	
 	public Events() {
+		isJoin = false;
 		
 	}
 	
@@ -28,6 +30,7 @@ public class Events {
 		this.time = time;
 		this.description = description;
 		this.photo = photo;
+		isJoin = false;
 	}
 
 	public int getEvent_id() {
@@ -113,5 +116,15 @@ public class Events {
 	public void setPhoto(Bitmap photo) {
 		this.photo = photo;
 	}
+
+	public boolean isJoin() {
+		return isJoin;
+	}
+
+	public void setJoin(boolean isJoin) {
+		this.isJoin = isJoin;
+	}
+	
+	
 
 }
