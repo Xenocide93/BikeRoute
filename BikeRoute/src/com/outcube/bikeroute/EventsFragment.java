@@ -25,6 +25,7 @@ import com.outcube.bikeroute.event.EventCard;
 import com.outcube.bikeroute.event.EventCardExpand;
 import com.outcube.bikeroute.event.EventCardHeader;
 import com.outcube.bikeroute.event.Events;
+import com.outcube.bikeroute.utility.SquareImageButton;
 
 import android.app.Fragment;
 import android.graphics.Bitmap;
@@ -48,6 +49,7 @@ public class EventsFragment extends Fragment{
 	private int totalEvents;
 	private int countEvents;
 	private boolean syncDone;
+	private static CardView thisMonthCardView, nextMonthCardView, overallCardView;
 	
 	
 	
@@ -58,10 +60,10 @@ public class EventsFragment extends Fragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		new AsyncCallerEventsFeed().execute();
 		totalEvents = 0;
 		countEvents = 0;
 		syncDone = false;
+		new AsyncCallerEventsFeed().execute(); 
 		initializeEventsArrayList();
 		
 	}
@@ -85,14 +87,14 @@ public class EventsFragment extends Fragment{
 		EventCardExpand expand = new EventCardExpand(getActivity(), thisMonth);
 		card.addCardExpand(expand);
 		
-		CardView cardView = (CardView) getActivity().findViewById(R.id.card_expand_this_month1);
-		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(cardView);
+		thisMonthCardView = (CardView) getActivity().findViewById(R.id.card_expand_this_month1);
+		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(thisMonthCardView);
 		card.setViewToClickToExpand(viewToClickToExpand);
 		
 		card.setExpanded(true);
 		
-		cardView.setCard(card);
-		header.arrow.setRotation(270f);
+		thisMonthCardView.setCard(card);
+		header.arrow.setRotation(-90f);
 	}
 	
 	private void initializeNextMonth(){
@@ -106,11 +108,11 @@ public class EventsFragment extends Fragment{
 		EventCardExpand expand = new EventCardExpand(getActivity(), nextMonth);
 		card.addCardExpand(expand);
 		
-		CardView cardView = (CardView) getActivity().findViewById(R.id.card_expand_next_month);
-		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(cardView);
+		nextMonthCardView = (CardView) getActivity().findViewById(R.id.card_expand_next_month);
+		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(nextMonthCardView);
 		card.setViewToClickToExpand(viewToClickToExpand);
 		
-		cardView.setCard(card);
+		nextMonthCardView.setCard(card);
 	}
 	
 	private void initializeOverall(){
@@ -124,55 +126,59 @@ public class EventsFragment extends Fragment{
 		EventCardExpand expand = new EventCardExpand(getActivity(), overAll);
 		card.addCardExpand(expand);
 		
-		CardView cardView = (CardView) getActivity().findViewById(R.id.card_expand_overall);
-		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(cardView);
+		overallCardView = (CardView) getActivity().findViewById(R.id.card_expand_overall);
+		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(overallCardView);
 		card.setViewToClickToExpand(viewToClickToExpand);
 		
-		cardView.setCard(card);
+		overallCardView.setCard(card);
 	}
 	
 	
 	private void refreshFragment() {
-		CardView cardView = (CardView) getActivity().findViewById(R.id.card_expand_this_month1);
-		CardView cardView2 = (CardView) getActivity().findViewById(R.id.card_expand_next_month);
-		CardView cardView3 = (CardView) getActivity().findViewById(R.id.card_expand_overall);
+//		CardView cardView = (CardView) getActivity().findViewById(R.id.card_expand_this_month1);
+//		CardView cardView2 = (CardView) getActivity().findViewById(R.id.card_expand_next_month);
+//		CardView cardView3 = (CardView) getActivity().findViewById(R.id.card_expand_overall);
 		
-		EventCard card = new EventCard(this.getActivity(), R.layout.event_card_layout);
-		card.setBackgroundResourceId(R.drawable.curve_background_gray);
-		card.setShadow(false);
-		EventCardHeader header = new EventCardHeader(getActivity(), "THIS MONTH");
-		card.addCardHeader(header);
-		EventCardExpand expand = new EventCardExpand(getActivity(), thisMonth);
-		card.addCardExpand(expand);
-		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(cardView);
-		card.setViewToClickToExpand(viewToClickToExpand);
-		card.setExpanded(true);
-		cardView.replaceCard(card);
-		header.arrow.setRotation(270f);
+		//-------------Ong Edit Test Refresh------------------
+		((EventCardExpand)thisMonthCardView.getCard().getCardExpand()).refreshInnerViewElements(thisMonth);
+		((EventCardExpand)nextMonthCardView.getCard().getCardExpand()).refreshInnerViewElements(nextMonth);
+		((EventCardExpand)overallCardView.getCard().getCardExpand()).refreshInnerViewElements(overAll);
+		//-------------End Ong Edit Test Refresh------------------
 		
-		EventCard card2 = new EventCard(this.getActivity(), R.layout.event_card_layout);
-		card2.setBackgroundResourceId(R.drawable.curve_background_gray);
-		card2.setShadow(false);
-		EventCardHeader header2 = new EventCardHeader(getActivity(), "NEXT MONTH");
-		card2.addCardHeader(header2);
-		EventCardExpand expand2 = new EventCardExpand(getActivity(), nextMonth);
-		card2.addCardExpand(expand2);
-		ViewToClickToExpand viewToClickToExpand2 = ViewToClickToExpand.builder().highlightView(false).setupView(cardView2);
-		card2.setViewToClickToExpand(viewToClickToExpand2);
-		cardView2.replaceCard(card2);
+//		card.setBackgroundResourceId(R.drawable.curve_background_gray);
+//		card.setShadow(false);
+//		EventCardHeader header = new EventCardHeader(getActivity(), "THIS MONTH");
+//		card.addCardHeader(header);
+//		EventCardExpand expand = new EventCardExpand(getActivity(), thisMonth);
+//		card.addCardExpand(expand);
+//		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(cardView);
+//		card.setViewToClickToExpand(viewToClickToExpand);
+//		card.setExpanded(true);
+//		cardView.replaceCard(card);
+//		header.arrow.setRotation(270f);
 		
-		EventCard card3 = new EventCard(this.getActivity(), R.layout.event_card_layout);
-		card3.setBackgroundResourceId(R.drawable.curve_background_gray);
-		card3.setShadow(false);
-		EventCardHeader header3 = new EventCardHeader(getActivity(), "OVERALL");
-		card3.addCardHeader(header3);
-		EventCardExpand expand3 = new EventCardExpand(getActivity(), overAll);
-		card3.addCardExpand(expand3);
-		ViewToClickToExpand viewToClickToExpand3 = ViewToClickToExpand.builder().highlightView(false).setupView(cardView3);
-		card3.setViewToClickToExpand(viewToClickToExpand3);
-		cardView3.replaceCard(card3);
+//		EventCard card2 = new EventCard(this.getActivity(), R.layout.event_card_layout);
+//		card2.setBackgroundResourceId(R.drawable.curve_background_gray);
+//		card2.setShadow(false);
+//		EventCardHeader header2 = new EventCardHeader(getActivity(), "NEXT MONTH");
+//		card2.addCardHeader(header2);
+//		EventCardExpand expand2 = new EventCardExpand(getActivity(), nextMonth);
+//		card2.addCardExpand(expand2);
+//		ViewToClickToExpand viewToClickToExpand2 = ViewToClickToExpand.builder().highlightView(false).setupView(cardView2);
+//		card2.setViewToClickToExpand(viewToClickToExpand2);
+//		cardView2.replaceCard(card2);
+//		
+//		EventCard card3 = new EventCard(this.getActivity(), R.layout.event_card_layout);
+//		card3.setBackgroundResourceId(R.drawable.curve_background_gray);
+//		card3.setShadow(false);
+//		EventCardHeader header3 = new EventCardHeader(getActivity(), "OVERALL");
+//		card3.addCardHeader(header3);
+//		EventCardExpand expand3 = new EventCardExpand(getActivity(), overAll);
+//		card3.addCardExpand(expand3);
+//		ViewToClickToExpand viewToClickToExpand3 = ViewToClickToExpand.builder().highlightView(false).setupView(cardView3);
+//		card3.setViewToClickToExpand(viewToClickToExpand3);
+//		cardView3.replaceCard(card3);
 	}
-	
 	
 	private void initializeEventsArrayList() {
 		Log.i("Mint", "initializeEventsArrayList");
@@ -387,9 +393,67 @@ public class EventsFragment extends Fragment{
 	    	super.onPostExecute(result);
 	    	if (totalEvents == countEvents) {
 	    		syncDone = true;
-	    		initializeEventsArrayList();
+//	    		initializeEventsArrayList(); <<<<<<<<<<<<<<<<<<< causing error, please fix
 	    	}
 	    }
+	}
+	
+	public static void updateJoinBtnStatus(int eventId){
+		boolean isThisMonthEvent = false;
+		for (int i = 0; i < thisMonth.size(); i++) {
+			if(thisMonth.get(i).getEvent_id() == eventId){
+				Events pack = thisMonth.get(i);
+				View row = ((EventCardExpand)thisMonthCardView.getCard().getCardExpand()).linearLayoutListView.getChildAt(i);
+				if(pack.isJoin()){
+					pack.setJoin(false);
+					((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_purple_selector);
+					((TextView)row.findViewById(R.id.join_btn_text)).setText("JOIN");
+				} else {
+					pack.setJoin(true);
+					((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_orange_selector);
+					((TextView)row.findViewById(R.id.join_btn_text)).setText("CANCEL");
+				}
+				row.requestLayout();
+				row.invalidate();
+				isThisMonthEvent = false;
+			}
+		}
+		if(!isThisMonthEvent){
+			for (int i = 0; i < nextMonth.size(); i++) {
+				if(nextMonth.get(i).getEvent_id() == eventId){
+					Events pack = nextMonth.get(i);
+					View row = ((EventCardExpand)nextMonthCardView.getCard().getCardExpand()).linearLayoutListView.getChildAt(i);
+					if(pack.isJoin()){
+						pack.setJoin(false);
+						((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_purple_selector);
+						((TextView)row.findViewById(R.id.join_btn_text)).setText("JOIN");
+					} else {
+						pack.setJoin(true);
+						((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_orange_selector);
+						((TextView)row.findViewById(R.id.join_btn_text)).setText("CANCEL");
+					}
+					row.requestLayout();
+					row.invalidate();
+				}
+			}
+		}
+		for (int i = 0; i < overAll.size(); i++) {
+			if(overAll.get(i).getEvent_id() == eventId){
+				Events pack = overAll.get(i);
+				View row = ((EventCardExpand)overallCardView.getCard().getCardExpand()).linearLayoutListView.getChildAt(i);
+				if(pack.isJoin()){
+					pack.setJoin(false);
+					((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_purple_selector);
+					((TextView)row.findViewById(R.id.join_btn_text)).setText("JOIN");
+				} else {
+					pack.setJoin(true);
+					((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_orange_selector);
+					((TextView)row.findViewById(R.id.join_btn_text)).setText("CANCEL");
+				}
+				row.requestLayout();
+				row.invalidate();
+			}
+		}
 	}
 
 }

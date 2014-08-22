@@ -49,8 +49,9 @@ public class Events {
 		this.eventDate = eventDate;
 	}
 
-	public int getDate() {
-		return date;
+	public String getDate() {
+		if(date<10) return "0"+date;
+		return ""+date;
 	}
 
 	public void setDate(int date) {
