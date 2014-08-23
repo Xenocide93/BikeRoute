@@ -495,10 +495,10 @@ public class ProfileFragment extends Fragment{
 		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(cardView);
 		card.setViewToClickToExpand(viewToClickToExpand);
 
-		card.setExpanded(true);
+//		card.setExpanded(true);
 
 		cardView.setCard(card);
-		header.arrow.setRotation(-90f);
+//		header.arrow.setRotation(-90f);
 	}
 
 	private void initializeWeeklyHistory(){

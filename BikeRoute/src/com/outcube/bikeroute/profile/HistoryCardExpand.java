@@ -92,6 +92,8 @@ public class HistoryCardExpand extends CardExpand {
 						});
 
 						GoogleMap googleMap = ((MapFragment) ((Activity)HistoryCardExpand.this.getContext()).getFragmentManager().findFragmentById(R.id.map)).getMap();
+						
+						//TODO setup map and route
 
 						dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 						dialog.show();
