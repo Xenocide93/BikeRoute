@@ -11,16 +11,14 @@ public class Events {
 	private String location;
 	private String time;
 	private String description;
-	private Bitmap photo;
+	private String photo;
 	private String eventDate;
 	private boolean isJoin;
 	
 	public Events() {
-		isJoin = false;
-		
 	}
 	
-	public Events(int event_id,int date,String month,String name,String location,String time,String description,Bitmap photo,String eventDate) {
+	public Events(int event_id,int date,String month,String name,String location,String time,String description,String photo,String eventDate, boolean isJoin) {
 		this.date = date;
 		this.event_id = event_id;
 		this.eventDate = eventDate;
@@ -30,7 +28,7 @@ public class Events {
 		this.time = time;
 		this.description = description;
 		this.photo = photo;
-		isJoin = false;
+		this.isJoin = isJoin;
 	}
 
 	public int getEvent_id() {
@@ -109,12 +107,12 @@ public class Events {
 	}
 
 
-	public Bitmap getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
 
 
-	public void setPhoto(Bitmap photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 

@@ -5,10 +5,9 @@ import it.gmariotti.cardslib.library.internal.ViewToClickToExpand;
 import it.gmariotti.cardslib.library.view.CardView;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -21,6 +20,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.outcube.bikeroute.database.EventsForDB;
+import com.outcube.bikeroute.database.JoinForDB;
 import com.outcube.bikeroute.event.EventCard;
 import com.outcube.bikeroute.event.EventCardExpand;
 import com.outcube.bikeroute.event.EventCardHeader;
@@ -32,6 +32,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,11 +51,6 @@ public class EventsFragment extends Fragment{
 	private int countEvents;
 	private boolean syncDone;
 	private static CardView thisMonthCardView, nextMonthCardView, overallCardView;
-	
-	
-	
-	// TODO: กด join, cancel event ต่างๆ ได้ ส่ง user_id, event_id ไป table eventjoined
-	// have another sqlite to store join history.
 
 	
 	@Override
@@ -91,10 +87,10 @@ public class EventsFragment extends Fragment{
 		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(thisMonthCardView);
 		card.setViewToClickToExpand(viewToClickToExpand);
 		
-		card.setExpanded(true);
+//		card.setExpanded(true);
 		
 		thisMonthCardView.setCard(card);
-		header.arrow.setRotation(-90f);
+//		header.arrow.setRotation(-90f);
 	}
 	
 	private void initializeNextMonth(){
@@ -135,49 +131,44 @@ public class EventsFragment extends Fragment{
 	
 	
 	private void refreshFragment() {
-//		CardView cardView = (CardView) getActivity().findViewById(R.id.card_expand_this_month1);
-//		CardView cardView2 = (CardView) getActivity().findViewById(R.id.card_expand_next_month);
-//		CardView cardView3 = (CardView) getActivity().findViewById(R.id.card_expand_overall);
+		CardView cardView = (CardView) getActivity().findViewById(R.id.card_expand_this_month1);
+		CardView cardView2 = (CardView) getActivity().findViewById(R.id.card_expand_next_month);
+		CardView cardView3 = (CardView) getActivity().findViewById(R.id.card_expand_overall);
 		
-		//-------------Ong Edit Test Refresh------------------
-		((EventCardExpand)thisMonthCardView.getCard().getCardExpand()).refreshInnerViewElements(thisMonth);
-		((EventCardExpand)nextMonthCardView.getCard().getCardExpand()).refreshInnerViewElements(nextMonth);
-		((EventCardExpand)overallCardView.getCard().getCardExpand()).refreshInnerViewElements(overAll);
-		//-------------End Ong Edit Test Refresh------------------
-		
-//		card.setBackgroundResourceId(R.drawable.curve_background_gray);
-//		card.setShadow(false);
-//		EventCardHeader header = new EventCardHeader(getActivity(), "THIS MONTH");
-//		card.addCardHeader(header);
-//		EventCardExpand expand = new EventCardExpand(getActivity(), thisMonth);
-//		card.addCardExpand(expand);
-//		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(cardView);
-//		card.setViewToClickToExpand(viewToClickToExpand);
+		EventCard card = new EventCard(this.getActivity(), R.layout.event_card_layout);
+		card.setBackgroundResourceId(R.drawable.curve_background_gray);
+		card.setShadow(false);
+		EventCardHeader header = new EventCardHeader(getActivity(), "THIS MONTH");
+		card.addCardHeader(header);
+		EventCardExpand expand = new EventCardExpand(getActivity(), thisMonth);
+		card.addCardExpand(expand);
+		ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder().highlightView(false).setupView(cardView);
+		card.setViewToClickToExpand(viewToClickToExpand);
 //		card.setExpanded(true);
-//		cardView.replaceCard(card);
-//		header.arrow.setRotation(270f);
+		cardView.replaceCard(card);
+//		header.arrow.setRotation(-90f);
 		
-//		EventCard card2 = new EventCard(this.getActivity(), R.layout.event_card_layout);
-//		card2.setBackgroundResourceId(R.drawable.curve_background_gray);
-//		card2.setShadow(false);
-//		EventCardHeader header2 = new EventCardHeader(getActivity(), "NEXT MONTH");
-//		card2.addCardHeader(header2);
-//		EventCardExpand expand2 = new EventCardExpand(getActivity(), nextMonth);
-//		card2.addCardExpand(expand2);
-//		ViewToClickToExpand viewToClickToExpand2 = ViewToClickToExpand.builder().highlightView(false).setupView(cardView2);
-//		card2.setViewToClickToExpand(viewToClickToExpand2);
-//		cardView2.replaceCard(card2);
-//		
-//		EventCard card3 = new EventCard(this.getActivity(), R.layout.event_card_layout);
-//		card3.setBackgroundResourceId(R.drawable.curve_background_gray);
-//		card3.setShadow(false);
-//		EventCardHeader header3 = new EventCardHeader(getActivity(), "OVERALL");
-//		card3.addCardHeader(header3);
-//		EventCardExpand expand3 = new EventCardExpand(getActivity(), overAll);
-//		card3.addCardExpand(expand3);
-//		ViewToClickToExpand viewToClickToExpand3 = ViewToClickToExpand.builder().highlightView(false).setupView(cardView3);
-//		card3.setViewToClickToExpand(viewToClickToExpand3);
-//		cardView3.replaceCard(card3);
+		EventCard card2 = new EventCard(this.getActivity(), R.layout.event_card_layout);
+		card2.setBackgroundResourceId(R.drawable.curve_background_gray);
+		card2.setShadow(false);
+		EventCardHeader header2 = new EventCardHeader(getActivity(), "NEXT MONTH");
+		card2.addCardHeader(header2);
+		EventCardExpand expand2 = new EventCardExpand(getActivity(), nextMonth);
+		card2.addCardExpand(expand2);
+		ViewToClickToExpand viewToClickToExpand2 = ViewToClickToExpand.builder().highlightView(false).setupView(cardView2);
+		card2.setViewToClickToExpand(viewToClickToExpand2);
+		cardView2.replaceCard(card2);
+		
+		EventCard card3 = new EventCard(this.getActivity(), R.layout.event_card_layout);
+		card3.setBackgroundResourceId(R.drawable.curve_background_gray);
+		card3.setShadow(false);
+		EventCardHeader header3 = new EventCardHeader(getActivity(), "OVERALL");
+		card3.addCardHeader(header3);
+		EventCardExpand expand3 = new EventCardExpand(getActivity(), overAll);
+		card3.addCardExpand(expand3);
+		ViewToClickToExpand viewToClickToExpand3 = ViewToClickToExpand.builder().highlightView(false).setupView(cardView3);
+		card3.setViewToClickToExpand(viewToClickToExpand3);
+		cardView3.replaceCard(card3);
 	}
 	
 	private void initializeEventsArrayList() {
@@ -200,6 +191,7 @@ public class EventsFragment extends Fragment{
 		toEventsPage();
 	}
 	
+	
 	private void toEventsPage() {
 		for (int i = 0; i < thisMonthEvents.size(); i++) {
 			EventsForDB temp = thisMonthEvents.get(i);
@@ -215,7 +207,13 @@ public class EventsFragment extends Fragment{
 			event.setLocation(temp.getEvent_location());
 			event.setName(temp.getEvent_name());
 			event.setTime(startDateTime[1] + "-" + endDateTime[1]);
-			if (temp.getEvent_photo() != null) event.setPhoto(decodeByteArray(temp.getEvent_photo()));
+			JoinForDB jointemp = MainActivity.databaseEventsJoined.getEventJoined(temp.getId());
+			if (jointemp == null) event.setJoin(false);
+			else {
+				if (jointemp.getJoin_status() == 1) event.setJoin(true);
+				else event.setJoin(false);
+			}
+			if (temp.getEvent_photo() != null && temp.getEvent_photo().length() != 0) event.setPhoto(temp.getEvent_photo());
 			event.setEventDate(startDateTime[0] + " to " + endDateTime[0]);
 			event.setEvent_id(temp.getId());
 			thisMonth.add(event);
@@ -234,7 +232,13 @@ public class EventsFragment extends Fragment{
 			event.setLocation(temp.getEvent_location());
 			event.setName(temp.getEvent_name());
 			event.setTime(startDateTime[1] + "-" + endDateTime[1]);
-			if (temp.getEvent_photo() != null) event.setPhoto(decodeByteArray(temp.getEvent_photo()));
+			JoinForDB jointemp = MainActivity.databaseEventsJoined.getEventJoined(temp.getId());
+			if (jointemp == null) event.setJoin(false);
+			else {
+				if (jointemp.getJoin_status() == 1) event.setJoin(true);
+				else event.setJoin(false);
+			}
+			if (temp.getEvent_photo() != null && temp.getEvent_photo().length() != 0) event.setPhoto(temp.getEvent_photo());
 			event.setEventDate(startDateTime[0] + " to " + endDateTime[0]);
 			event.setEvent_id(temp.getId());
 			nextMonth.add(event);
@@ -253,7 +257,13 @@ public class EventsFragment extends Fragment{
 			event.setLocation(temp.getEvent_location());
 			event.setName(temp.getEvent_name());
 			event.setTime(startDateTime[1] + "-" + endDateTime[1]);
-			if (temp.getEvent_photo() != null) event.setPhoto(decodeByteArray(temp.getEvent_photo()));
+			JoinForDB jointemp = MainActivity.databaseEventsJoined.getEventJoined(temp.getId());
+			if (jointemp == null) event.setJoin(false);
+			else {
+				if (jointemp.getJoin_status() == 1) event.setJoin(true);
+				else event.setJoin(false);
+			}
+			if (temp.getEvent_photo() != null && temp.getEvent_photo().length() != 0) event.setPhoto(temp.getEvent_photo());
 			event.setEventDate(startDateTime[0] + " to " + endDateTime[0]);
 			event.setEvent_id(temp.getId());
 			overAll.add(event);
@@ -262,11 +272,7 @@ public class EventsFragment extends Fragment{
 			refreshFragment();
 		}
 	}
-	
-	private Bitmap decodeByteArray(byte[] image) {
-		return BitmapFactory.decodeByteArray(image, 0, image.length);
-	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -286,8 +292,10 @@ public class EventsFragment extends Fragment{
 			webarray[i] = Integer.parseInt(webtemp2[i]);
 		}
 		if (MainActivity.nowTimeYear != webarray[0]) return false;
+		if (MainActivity.nowTimeMonth == webarray[1]) {
+			if (MainActivity.nowTimeDay > webarray[2]) return false;
+		} 
 		if (MainActivity.nowTimeMonth > webarray[1]) return false;
-		if (MainActivity.nowTimeDay > webarray[2]) return false;
 		return true;
 	}
 	
@@ -375,10 +383,21 @@ public class EventsFragment extends Fragment{
 	        try {
 	            InputStream in = new java.net.URL(urldisplay).openStream();
 	            mIcon11 = BitmapFactory.decodeStream(in);
-	            ByteArrayOutputStream out = new ByteArrayOutputStream();
-	            mIcon11.compress(Bitmap.CompressFormat.PNG, 100, out);
-	            byte[] buffer = out.toByteArray();
-	            event.setEvent_photo(buffer);
+	            String encodedImage;
+				int decrease = 0;
+				do {
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					mIcon11.compress(Bitmap.CompressFormat.JPEG, 100-decrease, baos);
+					byte[] imageBytes = baos.toByteArray();
+					try {
+						baos.close();
+						baos = null;
+					} catch (IOException e) {
+					}
+					encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+					decrease += 1;
+				} while (encodedImage.length() > 400000);
+	            event.setEvent_photo(encodedImage);
 	            MainActivity.databaseEvents.updateEvent(event);
 	            countEvents++;
 	            Log.i("Mint", "update event to sqlite successfully");
@@ -393,10 +412,11 @@ public class EventsFragment extends Fragment{
 	    	super.onPostExecute(result);
 	    	if (totalEvents == countEvents) {
 	    		syncDone = true;
-//	    		initializeEventsArrayList(); <<<<<<<<<<<<<<<<<<< causing error, please fix
+	    		initializeEventsArrayList();
 	    	}
 	    }
 	}
+	
 	
 	public static void updateJoinBtnStatus(int eventId){
 		boolean isThisMonthEvent = false;
@@ -406,10 +426,20 @@ public class EventsFragment extends Fragment{
 				View row = ((EventCardExpand)thisMonthCardView.getCard().getCardExpand()).linearLayoutListView.getChildAt(i);
 				if(pack.isJoin()){
 					pack.setJoin(false);
+					if (MainActivity.databaseEventsJoined.getEventJoined(pack.getEvent_id()) != null) {
+						MainActivity.databaseEventsJoined.updateEventJoined(new JoinForDB(pack.getEvent_id(), 2, "no"));
+					} else {
+						MainActivity.databaseEventsJoined.addEventJoined(new JoinForDB(pack.getEvent_id(), 2, "no"));
+					}
 					((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_purple_selector);
 					((TextView)row.findViewById(R.id.join_btn_text)).setText("JOIN");
 				} else {
 					pack.setJoin(true);
+					if (MainActivity.databaseEventsJoined.getEventJoined(pack.getEvent_id()) != null) {
+						MainActivity.databaseEventsJoined.updateEventJoined(new JoinForDB(pack.getEvent_id(), 1, "no"));
+					} else {
+						MainActivity.databaseEventsJoined.addEventJoined(new JoinForDB(pack.getEvent_id(), 1, "no"));
+					}
 					((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_orange_selector);
 					((TextView)row.findViewById(R.id.join_btn_text)).setText("CANCEL");
 				}
@@ -425,10 +455,20 @@ public class EventsFragment extends Fragment{
 					View row = ((EventCardExpand)nextMonthCardView.getCard().getCardExpand()).linearLayoutListView.getChildAt(i);
 					if(pack.isJoin()){
 						pack.setJoin(false);
+						if (MainActivity.databaseEventsJoined.getEventJoined(pack.getEvent_id()) != null) {
+							MainActivity.databaseEventsJoined.updateEventJoined(new JoinForDB(pack.getEvent_id(), 2, "no"));
+						} else {
+							MainActivity.databaseEventsJoined.addEventJoined(new JoinForDB(pack.getEvent_id(), 2, "no"));
+						}
 						((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_purple_selector);
 						((TextView)row.findViewById(R.id.join_btn_text)).setText("JOIN");
 					} else {
 						pack.setJoin(true);
+						if (MainActivity.databaseEventsJoined.getEventJoined(pack.getEvent_id()) != null) {
+							MainActivity.databaseEventsJoined.updateEventJoined(new JoinForDB(pack.getEvent_id(), 1, "no"));
+						} else {
+							MainActivity.databaseEventsJoined.addEventJoined(new JoinForDB(pack.getEvent_id(), 1, "no"));
+						}
 						((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_orange_selector);
 						((TextView)row.findViewById(R.id.join_btn_text)).setText("CANCEL");
 					}
@@ -443,10 +483,20 @@ public class EventsFragment extends Fragment{
 				View row = ((EventCardExpand)overallCardView.getCard().getCardExpand()).linearLayoutListView.getChildAt(i);
 				if(pack.isJoin()){
 					pack.setJoin(false);
+					if (MainActivity.databaseEventsJoined.getEventJoined(pack.getEvent_id()) != null) {
+						MainActivity.databaseEventsJoined.updateEventJoined(new JoinForDB(pack.getEvent_id(), 2, "no"));
+					} else {
+						MainActivity.databaseEventsJoined.addEventJoined(new JoinForDB(pack.getEvent_id(), 2, "no"));
+					}
 					((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_purple_selector);
 					((TextView)row.findViewById(R.id.join_btn_text)).setText("JOIN");
 				} else {
 					pack.setJoin(true);
+					if (MainActivity.databaseEventsJoined.getEventJoined(pack.getEvent_id()) != null) {
+						MainActivity.databaseEventsJoined.updateEventJoined(new JoinForDB(pack.getEvent_id(), 1, "no"));
+					} else {
+						MainActivity.databaseEventsJoined.addEventJoined(new JoinForDB(pack.getEvent_id(), 1, "no"));
+					}
 					((SquareImageButton)row.findViewById(R.id.join_btn)).setBackgroundResource(R.drawable.curve_background_orange_selector);
 					((TextView)row.findViewById(R.id.join_btn_text)).setText("CANCEL");
 				}
@@ -454,6 +504,75 @@ public class EventsFragment extends Fragment{
 				row.invalidate();
 			}
 		}
+		new syncJOIN().execute();
 	}
+
+	
+	
+    private static class syncJOIN extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //this method will be running on UI thread
+        }
+        @Override
+        protected Void doInBackground(Void... param) {
+    		//Create AsycHttpClient object
+    		AsyncHttpClient client = new AsyncHttpClient();
+    		RequestParams params = new RequestParams();
+    		List<JoinForDB> joinList = MainActivity.databaseEventsJoined.getAllEventsJoined();
+    		ArrayList<JoinForDB> joinLists = new ArrayList<JoinForDB>();
+    		for (int i = 0; i < joinList.size(); i++) {
+    			joinLists.add(joinList.get(i));
+    		}
+    		if(joinLists.size()!=0){
+    			if(MainActivity.databaseEventsJoined.dbSyncCount() != 0){
+    				params.put("usersJSON", MainActivity.databaseEventsJoined.composeJSONfromSQLite());
+    				client.post("http://128.199.216.175/sqlitemysqlsync/insertjoin.php",params ,new AsyncHttpResponseHandler() {
+    					@Override
+    					public void onSuccess(String response) {
+    						try {
+    							JSONArray arr = new JSONArray(response);
+    							for(int i=0; i<arr.length();i++){
+    								JSONObject obj = (JSONObject)arr.get(i);
+    								MainActivity.databaseEventsJoined.updateSyncStatus(obj.get("event_id").toString(),obj.get("status").toString());
+    							}
+    							Log.i("Mint", "DB Sync completed!");
+    						} catch (JSONException e) {
+    							Log.i("Mint", "Error Occured [Server's JSON response might be invalid]!");
+    							e.printStackTrace();
+    						}
+    					}
+
+    					@Override
+    					public void onFailure(int statusCode, Throwable error,String content) {
+    						if(statusCode == 404){
+    							Log.i("Mint", "Requested resource not found");
+    						}else if(statusCode == 500){
+    							Log.i("Mint", "Something went wrong at server end");
+    						}else{
+    							Log.i("Mint", "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet]");
+    						}
+    					}
+    				});
+    			}else{
+    				Log.i("Mint", "SQLite and Remote MySQL DBs are in Sync!");
+    			}
+    		}else{
+    			Log.i("Mint", "No data in SQLite DB, please do enter data to perform Sync action");
+    		}
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+        }
+    }
+	
+    public static void expandThisMonth(){
+    	if(thisMonthCardView == null) return;
+    	thisMonthCardView.setExpanded(true);
+    }
 
 }

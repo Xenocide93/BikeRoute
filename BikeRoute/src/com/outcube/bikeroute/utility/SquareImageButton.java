@@ -31,7 +31,6 @@ public class SquareImageButton extends ImageButton {
 	
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		// TODO Auto-generated method stub
 		if(size != -1){widthMeasureSpec = size; heightMeasureSpec = size;}
 		widthMeasureSpec -= (getPaddingLeft()+getPaddingRight());
 		heightMeasureSpec -= (getPaddingBottom()+getPaddingTop());

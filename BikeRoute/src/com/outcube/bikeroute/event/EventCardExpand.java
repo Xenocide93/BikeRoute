@@ -9,7 +9,10 @@ import com.outcube.bikeroute.utility.SquareImageButton;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -107,7 +110,7 @@ public class EventCardExpand extends CardExpand {
 					date.setText(pack.getEventDate());
 					time.setText(pack.getTime());
 					description.setText(pack.getDescription());
-					image.setImageBitmap(pack.getPhoto());
+					image.setImageBitmap(decodeByteArray(pack.getPhoto()));
 
 					dayTitle.setText(pack.getDate());
 					
@@ -140,6 +143,11 @@ public class EventCardExpand extends CardExpand {
 
 			linearLayoutListView.addView(row);
 		}
+	}
+	
+	private Bitmap decodeByteArray(String image) {
+		byte[] imageAsBytes = Base64.decode(image.getBytes(), Base64.DEFAULT);
+		return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
 	}
 
 	private void findAllById(View v){

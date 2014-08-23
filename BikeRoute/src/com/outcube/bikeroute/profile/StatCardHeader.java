@@ -16,14 +16,12 @@ public class StatCardHeader extends CardHeader {
 	
 	public StatCardHeader(Context context, int innerLayout) {
 		super(context, innerLayout);
-		// TODO Auto-generated constructor stub
 	}
 
 	public StatCardHeader(Context context, String title, String totalTime) {
 		super(context, R.layout.stat_card_header);
 		this.titleText = title;
 		this.totalTimeText = totalTime;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

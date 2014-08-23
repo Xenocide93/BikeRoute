@@ -40,7 +40,7 @@ public class DatabaseEvents extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         String CREATE_EVENT_TABLE = "CREATE TABLE " + TABLE_EVENT + "("
         		+ KEY_ID + " INTEGER," + KEY_NAME + " TEXT," + KEY_DESCRIPTION + " TEXT,"
-                + KEY_PHOTO + " BLOB," + KEY_LOCATION + " TEXT," + 
+                + KEY_PHOTO + " TEXT," + KEY_LOCATION + " TEXT," + 
                 KEY_START + " TEXT," + KEY_END + " TEXT" + ")";
         db.execSQL(CREATE_EVENT_TABLE);
     }
@@ -89,7 +89,7 @@ public class DatabaseEvents extends SQLiteOpenHelper{
             cursor.moveToFirst();
  
         EventsForDB event = new EventsForDB(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), 
-        		cursor.getBlob(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+        		cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
         return event;
     }
      
@@ -104,7 +104,7 @@ public class DatabaseEvents extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
             	EventsForDB event = new EventsForDB(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), 
-                		cursor.getBlob(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+                		cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
                 eventList.add(event);
             } while (cursor.moveToNext());
         }

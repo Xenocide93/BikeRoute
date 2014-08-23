@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import com.outcube.bikeroute.database.DatabaseEvents;
+import com.outcube.bikeroute.database.DatabaseEventsJoined;
 import com.outcube.bikeroute.database.DatabaseProfile;
 
 
@@ -32,15 +33,20 @@ import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 	
+
 	public static DatabaseEvents databaseEvents;
 	public static DatabaseProfile databaseProfile;
+	public static DatabaseEventsJoined databaseEventsJoined;
 	public static int nowTimeYear;
 	public static int nowTimeMonth;
 	public static int nowTimeDay;
+	public static int dayOfWeek; //dayOfWeek == 1 means Sunday .... 7 means Saturday
 	
-	public static int user_id = 1;
-	//dayOfWeek == 1 means Sunday .... 7 means Saturday
-	public static int dayOfWeek;
+	// TODO: ตอน feed ข้อมูล login จาก facebook ขึ้นไปเก็บในตาราง user 
+	// feed user_id กลับลงมาใส่ตัวแปรนี้ด้วยนะคะ
+	public static int user_id = 1; 
+	
+	
 	
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -80,6 +86,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		setContentView(R.layout.activity_main);
 		databaseEvents = new DatabaseEvents(this);
 		databaseProfile = new DatabaseProfile(this);
+		databaseEventsJoined = new DatabaseEventsJoined(this);
 		Calendar cal = Calendar.getInstance(TimeZone.getDefault());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
 	    String nowTime = ""+sdf.format(cal.getTime());
@@ -156,6 +163,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		// When the given tab is selected, switch to the corresponding page in
 		// the ViewPager.
 		mViewPager.setCurrentItem(tab.getPosition());
+		EventsFragment.expandThisMonth();
 	}
 
 	@Override

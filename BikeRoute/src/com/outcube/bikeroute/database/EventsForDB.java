@@ -5,7 +5,7 @@ public class EventsForDB {
 	private int event_id;
 	private String event_name;
 	private String event_desc;
-	private byte[] event_photo;
+	private String event_photo;
 	private String event_location;
 	private String event_startdate;
 	private String event_enddate;
@@ -14,7 +14,7 @@ public class EventsForDB {
 		
 	}
 	
-	public EventsForDB(int id, String event_name, String event_desc, byte[] event_photo,
+	public EventsForDB(int id, String event_name, String event_desc, String event_photo,
 		String event_location, String event_startdate, String event_enddate) {
 		this.event_id = id;
 		this.event_desc = event_desc;
@@ -49,11 +49,11 @@ public class EventsForDB {
 		this.event_desc = event_desc;
 	}
 
-	public byte[] getEvent_photo() {
+	public String getEvent_photo() {
 		return event_photo;
 	}
 
-	public void setEvent_photo(byte[] event_photo) {
+	public void setEvent_photo(String event_photo) {
 		this.event_photo = event_photo;
 	}
 

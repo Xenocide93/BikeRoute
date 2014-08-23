@@ -135,8 +135,6 @@ public class ProfileFragment extends Fragment{
 		}
 	}
 
-
-	
 	private String timeToString(long time) {
 		long diffSeconds = time / 1000 % 60;
 		long diffMinutes = time / (60 * 1000) % 60;
@@ -392,7 +390,7 @@ public class ProfileFragment extends Fragment{
 		card.setViewToClickToExpand(viewToClickToExpand);
 
 		card.setExpanded(true);
-
+		
 		cardView.replaceCard(card);
 		header.arrow.setRotation(-90f);
 		refreshWeeklyHistory();
@@ -482,8 +480,6 @@ public class ProfileFragment extends Fragment{
 	}
 
 	private void initializeTodayHistory(){
-		
-
 		HistoryCard card = new HistoryCard(this.getActivity(), R.layout.expand_outside_card_layout);
 		card.setBackgroundResourceId(R.drawable.curve_background_gray);
 		card.setShadow(false);
@@ -506,8 +502,6 @@ public class ProfileFragment extends Fragment{
 	}
 
 	private void initializeWeeklyHistory(){
-		
-
 		HistoryCard card = new HistoryCard(this.getActivity(), R.layout.expand_outside_card_layout);
 		card.setBackgroundResourceId(R.drawable.curve_background_gray);
 		card.setShadow(false);
@@ -527,8 +521,6 @@ public class ProfileFragment extends Fragment{
 	}
 
 	private void initializeMonthlyHistory(){
-
-
 		HistoryCard card = new HistoryCard(this.getActivity(), R.layout.expand_outside_card_layout);
 		card.setBackgroundResourceId(R.drawable.curve_background_gray);
 		card.setShadow(false);

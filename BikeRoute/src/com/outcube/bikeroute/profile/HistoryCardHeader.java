@@ -15,13 +15,11 @@ public class HistoryCardHeader extends CardHeader {
 
 	public HistoryCardHeader(Context context, int innerLayout) {
 		super(context, innerLayout);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public HistoryCardHeader(Context context, String title) {
 		super(context, R.layout.history_card_header);
 		this.titleText = title;
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
